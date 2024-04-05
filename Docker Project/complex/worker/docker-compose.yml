@@ -1,0 +1,44 @@
+version: '3'
+services: 
+#Nginix services
+nginx:
+  build: ./nginx
+  depends_on:
+    -api
+    -Client
+  ports:
+    - "3050:80"
+#postgress database
+postgress_db:
+  image: "postgress"
+  environment:
+    - POSTGRES_PASSWORD=postgres_password
+#redis database
+redis_db:
+  image: "redis"
+#API service
+api:
+    build: ./server
+    image: "waquar14/complex_api"
+    environment:
+      -REDIS_HOST=redis_db
+      -REDIS_PORT=6379
+      -PGHOST=postgress_db
+      -PGPORT=5432
+      -PGUSER=postgress
+      -PGPASSWORD=postgres_password
+      -PGDATABASE=postgress
+#Worker Service
+worker:
+    build: ./worker
+    image: "waquar14/complex_worker"
+    environment:
+      -REDIS_HOST=redis_db
+      -REDIS_PORT=5379
+#Client/Frontend Service
+Client:
+  build: ./client
+  image: "waquar14/complex_client"
+
+   
+      
