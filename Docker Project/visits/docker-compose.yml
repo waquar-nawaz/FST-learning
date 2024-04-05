@@ -1,0 +1,17 @@
+# version: '3'
+# services:
+#   redis_db:
+#     image: "redis"
+#     volumes:
+#       - ./data:/data
+#       - containerPath: ro
+#     command: ["redis-server", "--save", "1 1"]
+#   node_app:
+#     build: ./
+#     image: "waquar14/visits"
+#       # context: ./
+#       # dockerfile: Dockerfile
+#     ports:
+#       - "8081:8081"
+
+      
