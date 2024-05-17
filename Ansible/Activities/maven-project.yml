@@ -1,0 +1,20 @@
+-hosts: local
+become: true
+taks:
+  -name: Install required components
+  apt:
+    name:
+      -git
+      -maven
+      -openjdk-17-jdk
+    state: present
+
+  -name: Clone Maven Repo
+    git:
+      repo: hhtps://github.com/training-support/FST_Junit_Project.git
+      dest: /home/waquar14/FST_JUnit_Project
+
+  -name: Run Maven tests
+    command: mvn clean tests
+    args:
+      chdir: /home/waquar14/FST_JUnit_Project
