@@ -1,0 +1,16 @@
+# Column operations
+SELECT  id, name FROM employee;
+# Row operation
+SELECT * FROM employee WHERE salary > 30000;
+# Column operation that need aggregation
+SELECT count(*) FROM employee; 
+
+#Exports to HDFS directory
+INSERT OVERWRITE DIRECTORY '/user/waquar/output/export'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM emp.employee;
+
+#Exports to LOCAL directory
+INSERT OVERWRITE LOCAL DIRECTORY '/export' 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM emp.employee;
